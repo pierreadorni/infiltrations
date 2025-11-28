@@ -3,11 +3,11 @@ from tkinter import filedialog, messagebox
 from PIL import Image, ImageTk
 import os
 import PIL
-import cv2 # Added import
-import numpy as np # Added import
-import traceback # For detailed error printing
-import argparse # Added import for command-line arguments
-import csv # Added import for CSV export
+import cv2 
+import numpy as np 
+import traceback 
+import argparse 
+import csv
 
 # --- Added Image Processing Functions ---
 
@@ -17,7 +17,7 @@ def gamma_correct_target_d(image, target):
     Uses dichotomy to find the gamma value
     """
     image_float = image.astype(np.float32)
-    init_mean = np.mean(image)
+    init_mean = np.mean(image_float)
 
     # Determine search direction based on target vs. initial mean
     if init_mean == target:
