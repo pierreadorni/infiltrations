@@ -32,7 +32,7 @@ pip install pyinstaller
 
 REM Build
 echo 🏗️  Building executable...
-pyinstaller --onefile --noconsole build.spec
+pyinstaller build.spec
 
 REM Verify build
 if exist "dist\Cell Infiltrations.exe" (

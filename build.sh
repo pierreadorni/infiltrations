@@ -32,7 +32,7 @@ pip install pyinstaller
 
 # Build
 echo "🏗️  Building executable..."
-pyinstaller --onefile --noconsole build.spec
+pyinstaller build.spec
 
 # Verify build
 if [ -f "dist/Cell Infiltrations" ]; then
