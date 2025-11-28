@@ -40,11 +40,12 @@ jobs:
           tar -czf Cell_Infiltrations_linux_py${{ matrix.python-version }}.tar.gz Cell_Infiltrations_linux_py${{ matrix.python-version }}/
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Cell_Infiltrations_linux_py${{ matrix.python-version }}
           path: dist/Cell_Infiltrations_linux_py${{ matrix.python-version }}.tar.gz
           retention-days: 30
+          compression-level: 9
 
   build-macos-intel:
     runs-on: macos-latest
@@ -77,11 +78,12 @@ jobs:
           zip -r Cell_Infiltrations_macos_x86_64_py${{ matrix.python-version }}.zip Cell_Infiltrations_macos_x86_64_py${{ matrix.python-version }}/
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Cell_Infiltrations_macos_x86_64_py${{ matrix.python-version }}
           path: dist/Cell_Infiltrations_macos_x86_64_py${{ matrix.python-version }}.zip
           retention-days: 30
+          compression-level: 9
 
   build-macos-arm64:
     runs-on: macos-14
@@ -114,11 +116,12 @@ jobs:
           zip -r Cell_Infiltrations_macos_arm64_py${{ matrix.python-version }}.zip Cell_Infiltrations_macos_arm64_py${{ matrix.python-version }}/
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Cell_Infiltrations_macos_arm64_py${{ matrix.python-version }}
           path: dist/Cell_Infiltrations_macos_arm64_py${{ matrix.python-version }}.zip
           retention-days: 30
+          compression-level: 9
 
   build-windows:
     runs-on: windows-latest
@@ -154,11 +157,12 @@ jobs:
           Compress-Archive -Path "Cell_Infiltrations_windows_${{ matrix.arch }}_py${{ matrix.python-version }}" -DestinationPath "Cell_Infiltrations_windows_${{ matrix.arch }}_py${{ matrix.python-version }}.zip"
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Cell_Infiltrations_windows_${{ matrix.arch }}_py${{ matrix.python-version }}
           path: dist/Cell_Infiltrations_windows_${{ matrix.arch }}_py${{ matrix.python-version }}.zip
           retention-days: 30
+          compression-level: 9
 
   create-release:
     needs: [build-linux, build-macos-intel, build-macos-arm64, build-windows]
@@ -168,9 +172,10 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Download all artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           path: artifacts
+          merge-multiple: false
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
